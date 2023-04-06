@@ -1,0 +1,65 @@
+.wholeBackground {
+    background: #fcf7e6;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    z-index: -1;
+}
+
+.circle {
+    filter: blur(10px);
+    z-index: -1;
+    border-radius: 50%;
+    position: absolute;
+    filter: blur(15px);
+
+}
+
+.cirleOne {
+    width: 200px;
+    height: 200px;
+    top: 340px;
+    right: 100px;
+    background: #f79633;
+    animation: shrink 2.5s infinite alternate;
+
+}
+
+.circleTwo {
+    width: 200px;
+    height: 200px;
+    bottom: 140px;
+    left: 100px;
+    background: #b28d1c;
+    animation: shrink 3s infinite alternate;
+
+}
+
+.circleThree {
+    width: 200px;
+    height: 200px;
+    top: 140px;
+    right: 300px;
+    background: #ab5600;
+    animation: shrink 2s infinite alternate;
+
+}
+
+.circleFour {
+    width: 150px;
+    height: 150px;
+    bottom: 440px;
+    left: 160px;
+    background: yellowgreen;
+    animation: shrink 3.1s infinite alternate;
+
+}
+
+@keyframes shrink {
+    0% {
+        transform: scale(0.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

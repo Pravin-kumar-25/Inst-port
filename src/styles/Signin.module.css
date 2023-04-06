@@ -1,0 +1,19 @@
+.signInBlock {
+    display: 'flex';
+    background: red;
+    height: 200px;
+    width: 300px;
+}
+
+.authButtons {
+    display: flex;
+    width: inherit;
+    justify-content: flex-end;
+    gap: 5px;
+    position: relative;
+    background: white;
+}
+
+.authButtons div {
+    position: relative;
+}
