@@ -8,11 +8,35 @@ import PrimaryButton from '@/components/PrimaryButton'
 import SecondaryButton from '@/components/SecondaryButton'
 import { useRouter } from 'next/router'
 import LockPersonRoundedIcon from '@mui/icons-material/LockPersonRounded';
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+
 
 const signup = () => {
     const router = useRouter()
     const onSignInClick = () => {
         router.push('/sign-in')
+    }
+
+    const { control,register,handleSubmit } = useForm({
+        defaultValues: {
+          name: '',
+          email: '',
+          password:'',
+          confirmPassword:''
+        }
+      })
+
+
+    const [name, setName] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [email, setEmail] = useState('')
+
+
+    const onSignUp = (data) => {
+        // event.preventDefault();
+        console.log(data)
     }
 
     return (
@@ -23,27 +47,32 @@ const signup = () => {
         >
             <AuthBox
                 component="form"
-                noValidate
+                // noValidate
                 autoComplete="off"
+                onSubmit={handleSubmit(onSignUp)}
             >
+
                 <div className='titleWithIcon'>
                     <LockPersonRoundedIcon color='primary' />
                     <Typography variant='h5' component='h5' className={maconda.className}>SIGN UP</Typography>
                 </div>
-                <StandardInput label='Name'/>
-                <StandardInput label='Email'/>
-                <StandardInput label='Password'/>
-                <StandardInput label='Confirm Password'/>
+                <StandardInput control={control} name="name"  label='Name' helperText="Please enter your name" />
+                <StandardInput control={control} name="email"  label='Email' helperText="Please enter your name" />
+                <StandardInput control={control} name="password"  label='Password' helperText="Please enter your name" />
+                <StandardInput control={control} name="confirmPassword"  label='Confirm Password' helperText="Please enter your name" />
+
+
                 <div className={styles.authButtons}>
                     <SecondaryButton variant='outlined'
-               className={maconda.className}
-                    onClick={onSignInClick}
+                        className={maconda.className}
+                        onClick={onSignInClick}
                     >
                         Already have an account? Sign in
                     </SecondaryButton>
-                    <PrimaryButton variant='contained' className={maconda.className}>Sign up</PrimaryButton>
+                    <PrimaryButton variant='contained' className={maconda.className} type='submit' onClick={handleSubmit(onSignUp)} >Sign up</PrimaryButton>
 
                 </div>
+
             </AuthBox>
         </Paper>
     )

@@ -3,6 +3,30 @@ import TextField from '@mui/material/TextField'
 import { makeStyles } from '@mui/styles'
 // import useTheme from '@mui/styles'
 import { useTheme } from '@mui/material'
+import { forwardRef } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+
+
+const StandardInput = (props, refs) => {
+    // const classes = useStyles()
+    const theme = useTheme()
+    // const register = props.register
+    return (
+        <Controller
+            name={props.name}
+            control={props.control}
+            render={({field}) => <TextField {...field} {...props} variant='standard'
+                sx={{
+                    width: '100%',
+                }}
+
+                // className={classes.root}
+                color="primary"
+            />}
+        />
+
+    )
+}
 
 // const useStyles = makeStyles((theme) => ({
 //     root: {
@@ -17,20 +41,5 @@ import { useTheme } from '@mui/material'
 //           },
 //     }
 // }))
-
-const StandardInput = ({ label }) => {
-    // const classes = useStyles()
-    const theme = useTheme()
-
-    return (
-        <TextField label={label} variant='standard' 
-            sx={{
-                width:'100%',
-            }}
-            // className={classes.root}
-            color="primary"
-        />
-    )
-}
 
 export default StandardInput

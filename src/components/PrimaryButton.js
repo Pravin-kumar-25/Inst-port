@@ -2,11 +2,11 @@ import { Button } from "@mui/material";
 import { createStyles, withStyles } from '@mui/styles'
 
 const primaryButton = (props) => {
-    const { classes, children } = props
+    const { children } = props
 
     return (
         <div className="buttonBorder">
-            <PrimaryButton >{children}</PrimaryButton>
+            <PrimaryButton {...props} >{children}</PrimaryButton>
         </div>
     )
 }

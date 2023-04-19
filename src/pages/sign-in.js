@@ -17,6 +17,10 @@ const signin = () => {
   const theme = useTheme()
   const router = useRouter()
 
+  const onSignIn = () => {
+    
+  }
+
   const onSignUpClick = (event) => {
     event.preventDefault()
     console.log(event)
@@ -45,17 +49,17 @@ const signin = () => {
           <StandardInput label='Password' />
           <div className={styles.authButtons}>
             <PrimaryButton variant='contained'>Sign in</PrimaryButton>
-              <SecondaryButton variant='outlined'
-               className={maconda.className}
-                onClick={onSignUpClick}
-              >Sign up
-              </SecondaryButton>
+            <SecondaryButton variant='outlined'
+              className={maconda.className}
+              onClick={onSignUpClick}
+            >
+              Sign up
+            </SecondaryButton>
           </div>
 
         </AuthBox>
       </Paper>
     </>
-
   )
 }
 
