@@ -15,7 +15,8 @@ const StandardInput = (props, refs) => {
         <Controller
             name={props.name}
             control={props.control}
-            render={({field}) => <TextField {...field} {...props} variant='standard'
+            rules={props.rules}
+            render={({ field }) => <TextField {...field} {...props} variant='standard'
                 sx={{
                     width: '100%',
                 }}

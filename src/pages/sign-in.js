@@ -12,13 +12,21 @@ import PrimaryButton from '@/components/PrimaryButton'
 import { maconda } from '@/utils/fonts'
 import SecondaryButton from '@/components/SecondaryButton'
 import { useRouter } from 'next/router'
+import { useForm } from 'react-hook-form'
 
 const signin = () => {
   const theme = useTheme()
   const router = useRouter()
 
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      email: '',
+      password: ''
+    }
+  })
+
   const onSignIn = () => {
-    
+
   }
 
   const onSignUpClick = (event) => {
@@ -40,15 +48,16 @@ const signin = () => {
           component="form"
           noValidate
           autoComplete="off"
+          onSubmit={handleSubmit(onSignIn)}
         >
           <div className='titleWithIcon'>
             <LockPersonRoundedIcon color='primary' />
             <Typography variant='h5' component='h5' className={maconda.className}>SIGN IN</Typography>
           </div>
-          <StandardInput label='Email' />
-          <StandardInput label='Password' />
+          <StandardInput control={control} name='email' label="Email" />
+          <StandardInput control={control} name='password' label="Password" />
           <div className={styles.authButtons}>
-            <PrimaryButton variant='contained'>Sign in</PrimaryButton>
+            <PrimaryButton variant='contained' type="submit">Sign in</PrimaryButton>
             <SecondaryButton variant='outlined'
               className={maconda.className}
               onClick={onSignUpClick}

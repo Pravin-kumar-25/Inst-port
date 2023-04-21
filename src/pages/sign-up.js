@@ -8,8 +8,8 @@ import PrimaryButton from '@/components/PrimaryButton'
 import SecondaryButton from '@/components/SecondaryButton'
 import { useRouter } from 'next/router'
 import LockPersonRoundedIcon from '@mui/icons-material/LockPersonRounded';
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { confirmPasswordRules, emailRules, nameRules, passwordRules } from '@/utils/inputRules'
 
 
 const signup = () => {
@@ -18,21 +18,16 @@ const signup = () => {
         router.push('/sign-in')
     }
 
-    const { control,register,handleSubmit } = useForm({
+    const { control, watch, formState: { errors }, handleSubmit } = useForm({
         defaultValues: {
-          name: '',
-          email: '',
-          password:'',
-          confirmPassword:''
+            name: '',
+            email: '',
+            password: '',
+            confirmPassword: ''
         }
-      })
+    })
 
-
-    const [name, setName] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [email, setEmail] = useState('')
-
+    const password = watch('password')
 
     const onSignUp = (data) => {
         // event.preventDefault();
@@ -56,10 +51,20 @@ const signup = () => {
                     <LockPersonRoundedIcon color='primary' />
                     <Typography variant='h5' component='h5' className={maconda.className}>SIGN UP</Typography>
                 </div>
-                <StandardInput control={control} name="name"  label='Name' helperText="Please enter your name" />
-                <StandardInput control={control} name="email"  label='Email' helperText="Please enter your name" />
-                <StandardInput control={control} name="password"  label='Password' helperText="Please enter your name" />
-                <StandardInput control={control} name="confirmPassword"  label='Confirm Password' helperText="Please enter your name" />
+                <StandardInput control={control} name="name" label='Name' helperText={errors.name?.message} rules={nameRules} />
+                <StandardInput control={control} name="email" label='Email' helperText={errors.email?.message} rules={emailRules} />
+                <StandardInput control={control} type='password' name="password" label='Password' helperText={errors.password?.message} rules={passwordRules} />
+                <StandardInput control={control} name="confirmPassword" label='Confirm Password' helperText={errors.confirmPassword?.message}
+                    rules={{
+                        required: 'Confirm Password',
+                        validate: (value) => {
+                            if (value !== password) {
+                                return 'Password does not match...'
+                            }
+                            return false
+                        }
+                    }}
+                />
 
 
                 <div className={styles.authButtons}>
