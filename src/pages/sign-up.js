@@ -9,7 +9,7 @@ import SecondaryButton from '@/components/SecondaryButton'
 import { useRouter } from 'next/router'
 import LockPersonRoundedIcon from '@mui/icons-material/LockPersonRounded';
 import { useForm } from 'react-hook-form'
-import { confirmPasswordRules, emailRules, nameRules, passwordRules } from '@/utils/inputRules'
+import { emailRules, nameRules, passwordRules } from '@/utils/inputRules'
 
 
 const signup = () => {
@@ -51,19 +51,20 @@ const signup = () => {
                     <LockPersonRoundedIcon color='primary' />
                     <Typography variant='h5' component='h5' className={maconda.className}>SIGN UP</Typography>
                 </div>
-                <StandardInput control={control} name="name" label='Name' helperText={errors.name?.message} rules={nameRules} />
-                <StandardInput control={control} name="email" label='Email' helperText={errors.email?.message} rules={emailRules} />
-                <StandardInput control={control} type='password' name="password" label='Password' helperText={errors.password?.message} rules={passwordRules} />
-                <StandardInput control={control} name="confirmPassword" label='Confirm Password' helperText={errors.confirmPassword?.message}
+                <StandardInput control={control} name="name" label='Name' helperText={errors.name?.message} rules={nameRules} error={errors.name ? true : false} />
+                <StandardInput control={control} name="email" label='Email' helperText={errors.email?.message} rules={emailRules} error={errors.email ? true : false}/>
+                <StandardInput control={control} type='password' name="password" label='Password' helperText={errors.password?.message} rules={passwordRules} error={errors.password ? true : false}/>
+                <StandardInput control={control} type='password' name="confirmPassword" label='Confirm Password' helperText={errors.confirmPassword?.message}
                     rules={{
-                        required: 'Confirm Password',
+                        required: 'Confirm your Password',
                         validate: (value) => {
                             if (value !== password) {
                                 return 'Password does not match...'
                             }
-                            return false
+                            return null
                         }
                     }}
+                    error={errors.confirmPassword ? true : false}
                 />
 
 

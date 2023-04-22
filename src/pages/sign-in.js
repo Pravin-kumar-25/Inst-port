@@ -1,7 +1,7 @@
 import React from 'react'
 import AuthBox from '@/components/AuthBox'
 import styles from '@/styles/Signin.module.css'
-import { Paper, Typography } from '@mui/material'
+import { IconButton, InputAdornment, Paper, Typography } from '@mui/material'
 import StandardInput from '@/components/StandardInput'
 import LockIcon from '@mui/icons-material/Lock';
 import FormControl from '@mui/material'
@@ -13,20 +13,24 @@ import { maconda } from '@/utils/fonts'
 import SecondaryButton from '@/components/SecondaryButton'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
+import { emailRules, signInPasswordRules } from '@/utils/inputRules'
+import { useState } from 'react'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 
 const signin = () => {
   const theme = useTheme()
   const router = useRouter()
+  const [showPassword, setShowPassword] = useState(false)
 
-  const { control, handleSubmit } = useForm({
+  const { control, formState: { errors }, handleSubmit } = useForm({
     defaultValues: {
       email: '',
       password: ''
     }
   })
 
-  const onSignIn = () => {
-
+  const onSignIn = (data) => {
+    console.log(data)
   }
 
   const onSignUpClick = (event) => {
@@ -54,8 +58,21 @@ const signin = () => {
             <LockPersonRoundedIcon color='primary' />
             <Typography variant='h5' component='h5' className={maconda.className}>SIGN IN</Typography>
           </div>
-          <StandardInput control={control} name='email' label="Email" />
-          <StandardInput control={control} name='password' label="Password" />
+          <StandardInput control={control} name='email' label="Email" helperText={errors.email?.message} rules={emailRules} />
+          <StandardInput control={control} name='password' label="Password" helperText={errors.password?.message} rules={signInPasswordRules}
+            type={showPassword ? 'text' : 'password'}
+            InputProps={{
+              endAdornment:
+                <InputAdornment position='end'>
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+            }}
+          />
           <div className={styles.authButtons}>
             <PrimaryButton variant='contained' type="submit">Sign in</PrimaryButton>
             <SecondaryButton variant='outlined'

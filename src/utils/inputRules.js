@@ -33,9 +33,12 @@ export const passwordRules = {
         if(!numberRegex.test(pass)) {
             return 'Password should contain atleast one number...'
         }
-        return false;
+        return null;
     }
-    
+}
+
+export const signInPasswordRules ={
+    required: 'Enter your password'
 }
 
 // export const confirmPasswordRules = {
