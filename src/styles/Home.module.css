@@ -1,5 +1,5 @@
 .wholeBackground {
-    background: #fcf7e6;
+    background: #F2F5F5;
     width: 100%;
     height: 100vh;
     position: absolute;
@@ -20,7 +20,7 @@
     height: 200px;
     top: 340px;
     right: 100px;
-    background: #f79633;
+    background: #8739F9;
     animation: shrink 2.5s infinite alternate;
 
 }
@@ -30,7 +30,7 @@
     height: 200px;
     bottom: 140px;
     left: 100px;
-    background: #b28d1c;
+    background: #37B9F1;
     animation: shrink 3s infinite alternate;
 
 }
@@ -40,7 +40,7 @@
     height: 200px;
     top: 140px;
     right: 300px;
-    background: #ab5600;
+    background: #5e18c7;
     animation: shrink 2s infinite alternate;
 
 }
@@ -50,7 +50,7 @@
     height: 150px;
     bottom: 440px;
     left: 160px;
-    background: yellowgreen;
+    background: #1084b5;
     animation: shrink 3.1s infinite alternate;
 
 }

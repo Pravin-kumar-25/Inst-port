@@ -14,11 +14,10 @@ import { styled } from '@mui/material/styles'
 
 const SecondaryButton = withStyles((theme) => ({
     root: {
-        border: '2px dotted',
-        borderRadius: '5px',
-        color: 'primary',
+        border: '1px solid',
+        borderRadius: '0px',
+        color: 'secondary',
         '&:hover': {
-            border: '2px solid',
             background: theme.palette.primary.main,
             color: theme.palette.primary.contrastText
         },

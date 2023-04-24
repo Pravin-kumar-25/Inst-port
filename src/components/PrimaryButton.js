@@ -14,12 +14,12 @@ const primaryButton = (props) => {
 const PrimaryButton = withStyles((theme) => ({
     root: {
         borderRadius: '0px',
-        background:theme.palette.primary.light,
+        background:theme.palette.primary.main,
         color: 'white',
         position:'relative',
         '&:hover': {
-            background: theme.palette.secondary.light,
-            color: theme.palette.primary.dark
+            background: theme.palette.primary.dark,
+            color: theme.palette.primary.contrastText
         },
     }
 }))(Button)

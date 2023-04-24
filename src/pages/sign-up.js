@@ -10,6 +10,7 @@ import { useRouter } from 'next/router'
 import LockPersonRoundedIcon from '@mui/icons-material/LockPersonRounded';
 import { useForm } from 'react-hook-form'
 import { emailRules, nameRules, passwordRules } from '@/utils/inputRules'
+import { signUp } from '@/utils/commonUtils'
 
 
 const signup = () => {
@@ -32,6 +33,7 @@ const signup = () => {
     const onSignUp = (data) => {
         // event.preventDefault();
         console.log(data)
+        signUp(data)
     }
 
     return (
@@ -73,7 +75,7 @@ const signup = () => {
                         className={maconda.className}
                         onClick={onSignInClick}
                     >
-                        Already have an account? Sign in
+                        Login
                     </SecondaryButton>
                     <PrimaryButton variant='contained' className={maconda.className} type='submit' onClick={handleSubmit(onSignUp)} >Sign up</PrimaryButton>
 

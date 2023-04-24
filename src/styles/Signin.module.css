@@ -1,6 +1,6 @@
 .signInBlock {
     display: 'flex';
-    background: red;
+    /* background: red; */
     height: 200px;
     width: 300px;
 }
