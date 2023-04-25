@@ -30,10 +30,13 @@ const signup = () => {
 
     const password = watch('password')
 
-    const onSignUp = (data) => {
+    const onSignUp = async (data) => {
         // event.preventDefault();
-        console.log(data)
-        signUp(data)
+        await signUp({
+            name: data.name,
+            email: data.email,
+            password: data.password
+        })
     }
 
     return (
@@ -54,8 +57,8 @@ const signup = () => {
                     <Typography variant='h5' component='h5' className={maconda.className}>SIGN UP</Typography>
                 </div>
                 <StandardInput control={control} name="name" label='Name' helperText={errors.name?.message} rules={nameRules} error={errors.name ? true : false} />
-                <StandardInput control={control} name="email" label='Email' helperText={errors.email?.message} rules={emailRules} error={errors.email ? true : false}/>
-                <StandardInput control={control} type='password' name="password" label='Password' helperText={errors.password?.message} rules={passwordRules} error={errors.password ? true : false}/>
+                <StandardInput control={control} name="email" label='Email' helperText={errors.email?.message} rules={emailRules} error={errors.email ? true : false} />
+                <StandardInput control={control} type='password' name="password" label='Password' helperText={errors.password?.message} rules={passwordRules} error={errors.password ? true : false} />
                 <StandardInput control={control} type='password' name="confirmPassword" label='Confirm Password' helperText={errors.confirmPassword?.message}
                     rules={{
                         required: 'Confirm your Password',

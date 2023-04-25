@@ -16,6 +16,7 @@ import { useForm } from 'react-hook-form'
 import { emailRules, signInPasswordRules } from '@/utils/inputRules'
 import { useState } from 'react'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { signIn } from '@/utils/commonUtils'
 
 const signin = () => {
   const theme = useTheme()
@@ -29,8 +30,12 @@ const signin = () => {
     }
   })
 
-  const onSignIn = (data) => {
+  const onSignIn = async (data) => {
     console.log(data)
+    await signIn({
+      emailId: data.email,
+      password: data.password
+    })
   }
 
   const onSignUpClick = (event) => {
