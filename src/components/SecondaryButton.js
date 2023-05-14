@@ -12,16 +12,26 @@ import { styled } from '@mui/material/styles'
 //     },
 // })
 
-const SecondaryButton = withStyles((theme) => ({
-    root: {
-        border: '1px solid',
-        borderRadius: '0px',
-        color: 'secondary',
-        '&:hover': {
-            background: theme.palette.primary.main,
-            color: theme.palette.primary.contrastText
-        },
-    }
-}))(Button)
+const SecondaryButton = styled(Button)(({ theme }) => ({
+    border: '1px solid',
+    borderRadius: '0px',
+    color: 'secondary',
+    '&:hover': {
+        background: theme.palette.primary.main,
+        color: theme.palette.primary.contrastText
+    },
+}))
+
+// const SecondaryButton = withStyles((theme) => ({
+//     root: {
+//         border: '1px solid',
+//         borderRadius: '0px',
+//         color: 'secondary',
+//         '&:hover': {
+//             background: theme.palette.primary.main,
+//             color: theme.palette.primary.contrastText
+//         },
+//     }
+// }))(Button)
 
 export default SecondaryButton

@@ -1,7 +1,7 @@
 import AuthBox from '@/components/AuthBox'
 import StandardInput from '@/components/StandardInput'
 import { maconda } from '@/utils/fonts'
-import { Paper, Typography } from '@mui/material'
+import { Fade, Paper, Typography } from '@mui/material'
 import React from 'react'
 import styles from '@/styles/Signin.module.css'
 import PrimaryButton from '@/components/PrimaryButton'
@@ -10,11 +10,18 @@ import { useRouter } from 'next/router'
 import LockPersonRoundedIcon from '@mui/icons-material/LockPersonRounded';
 import { useForm } from 'react-hook-form'
 import { emailRules, nameRules, passwordRules } from '@/utils/inputRules'
-import { signUp } from '@/utils/commonUtils'
+import { checkUser, signUp } from '@/utils/commonUtils'
+import nookies from 'nookies'
+import useLoading from '@/utils/customHook/useLoading'
+import Loading from '@/components/Loading'
 
 
-const signup = () => {
+const signup = ({ user }) => {
     const router = useRouter()
+    const [loading, setLoading] = useLoading()
+
+
+
     const onSignInClick = () => {
         router.push('/sign-in')
     }
@@ -32,14 +39,27 @@ const signup = () => {
 
     const onSignUp = async (data) => {
         // event.preventDefault();
-        await signUp({
+        const responseData = await signUp({
             name: data.name,
             email: data.email,
             password: data.password
         })
+        // nookies.set(null,'userData',responseData, {})
+        // localStorage.setItem("token",responseData.token);
+        router.push('/profile')
+    }
+
+    if (loading) {
+        return <Loading />
+    }
+    if (user) {
+        router.push('/profile')
+        return <Loading />
     }
 
     return (
+      <Fade in={true}>
+
         <Paper elevation={4} sx={{
             width: "40%",
             borderRadius: '20px'
@@ -86,7 +106,12 @@ const signup = () => {
 
             </AuthBox>
         </Paper>
+        </Fade >
     )
+}
+
+export async function getServerSideProps(context) {
+    return await checkUser(context)
 }
 
 export default signup

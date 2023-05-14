@@ -12,29 +12,29 @@ export const emailRules = {
 
 export const passwordRules = {
     required: 'Enter your password',
-    minLength: {
-        value: 5,
-        message: 'Password length must be greater than 5...'
-    },
-    validate: (pass) => {
-        const numberRegex = new RegExp('[0-9]')
-        const specialCharRegex = new RegExp(/[@!#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g)
-        const capsRegex = new RegExp('[A-Z]')
-        const smallRegex = new RegExp('[a-z]')
-        if(!capsRegex.test(pass)) {
-            return 'Password must contain capital letter...'
-        }
-        if(!smallRegex.test(pass)) {
-            return 'Password must contain small letter...'
-        }
-        if(!specialCharRegex.test(pass)) {
-            return 'Password must contain atleast one special character...'
-        }
-        if(!numberRegex.test(pass)) {
-            return 'Password should contain atleast one number...'
-        }
-        return null;
-    }
+    // minLength: {
+    //     value: 5,
+    //     message: 'Password length must be greater than 5...'
+    // },
+    // validate: (pass) => {
+    //     const numberRegex = new RegExp('[0-9]')
+    //     const specialCharRegex = new RegExp(/[@!#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g)
+    //     const capsRegex = new RegExp('[A-Z]')
+    //     const smallRegex = new RegExp('[a-z]')
+    //     if(!capsRegex.test(pass)) {
+    //         return 'Password must contain capital letter...'
+    //     }
+    //     if(!smallRegex.test(pass)) {
+    //         return 'Password must contain small letter...'
+    //     }
+    //     if(!specialCharRegex.test(pass)) {
+    //         return 'Password must contain atleast one special character...'
+    //     }
+    //     if(!numberRegex.test(pass)) {
+    //         return 'Password should contain atleast one number...'
+    //     }
+    //     return null;
+    // }
 }
 
 export const signInPasswordRules ={

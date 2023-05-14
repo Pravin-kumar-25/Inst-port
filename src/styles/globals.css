@@ -24,6 +24,8 @@ a {
   height: 100vh;
   flex-direction: column;
   gap: 10px;
+  background-image: url('/images/BG.jpg');
+  background-size: cover;
 }
 
 .titleWithIcon {
