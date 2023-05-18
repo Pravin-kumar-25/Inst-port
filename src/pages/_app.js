@@ -1,7 +1,7 @@
 import '@/styles/globals.css'
 import theme from '@/styles/theme';
 import { ThemeProvider } from '@mui/material/styles';
-import { maconda } from '@/utils/fonts';
+import { maconda, montserrat } from '@/utils/fonts';
 import HomeBackground from '@/components/HomeBackground';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -33,17 +33,19 @@ export default function App({ Component, pageProps }) {
 
   return (
     <ThemeProvider theme={theme}>
+      <NavBar />
+
       {/* <HomeBackground > */}
-        <div id='main-container'
-        // className={maconda.className}
-        >
-          <Layout {...pageProps}>
-            <NavBar />
-            <Component {...pageProps} />
+      <div id='main-container'
+      className={montserrat.className}
+      >
 
-          </Layout>
+        <Layout {...pageProps}>
+          <Component {...pageProps} />
 
-        </div>
+        </Layout>
+
+      </div>
       {/* </HomeBackground> */}
     </ThemeProvider>
 

@@ -1,9 +1,11 @@
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheets } from '@mui/styles'
+import { Montserrat } from '@next/font/google';
 
 function MyDocument(props) {
-  const {styles} = props
+  // const montFont = Montserrat({ weight:"100",style:"normal" })
+  const { styles } = props
   return (
     <Html lang="en">
       <Head>

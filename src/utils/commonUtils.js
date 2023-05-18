@@ -29,6 +29,11 @@ export const signIn = async (data) => {
     }
 }
 
+export const logOut = async (data) => {
+    nookies.destroy(null,'token');
+    nookies.destroy(null,'user')
+}
+
 export const checkUser = async (ctx) => {
     const { token, user } = nookies.get(ctx)
     console.log(user,'inside check');

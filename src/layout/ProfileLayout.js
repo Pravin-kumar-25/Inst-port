@@ -26,13 +26,12 @@ const ProfileLayout = ({ user, children }) => {
     ]
     const router = useRouter()
     const path = router.pathname
-    console.log(router);
+
     let selectedIndex = listOfMenu.findIndex((obj) => {
         let currentPath = path.replace('/profile', '');
         if (currentPath === '') return true;
         return currentPath.includes(obj.title.toLowerCase())
     })
-    console.log(selectedIndex, "sel ind");
 
     const [isLoading, setIsLoading] = useLoading()
     const [listSelected, setIsListSelected] = useState(selectedIndex)
@@ -61,7 +60,6 @@ const ProfileLayout = ({ user, children }) => {
     }
 
     if (isLoading) {
-        console.log("inside loading");
         return <Loading />
     }
     if (!user) {
@@ -74,7 +72,8 @@ const ProfileLayout = ({ user, children }) => {
             display: 'flex',
             gap: '40px',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            height:'90vh'
         }}>
             <Paper sx={{
                 display: 'flex',

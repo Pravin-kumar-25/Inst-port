@@ -15,7 +15,6 @@ export default function index({ user }) {
     const path = router.pathname
 
     if (isLoading) {
-        console.log("inside loading");
         return <Loading />
     }
     if (!user) {

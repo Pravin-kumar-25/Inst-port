@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles'
 
 const AuthBox = styled(Box)`
   display:flex; 
-  gap:3ch;
+  gap:2ch;
   flex-direction:column;
   width:100%;
   align-items:center;

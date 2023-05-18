@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import { Button, Container } from '@mui/material'
 import { useRouter } from 'next/router'
 import signin from './sign-in'
+import PostCard from '@/components/PostCard'
 
 
 const Home = () => {
@@ -14,16 +15,29 @@ const Home = () => {
 
   return (
     <Container maxWidth='xl' sx={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems:'center',
+      gap:'20px',
       width:'100%',
-      height:'100vh',
-      // background:'red'
+      // // height:'100vh',
+      flexDirection:'column',
+      position: 'relative',
+      top:'70px',
+      display:'flex',
+      flexDirection:'column',
+      justifyContent: 'center',
+      alignItems:'center'
+      // // overflow:'scroll'
+      // // background:'red'
     }}>
-      <Button color='primary'>
-        hlo
-      </Button>
+      <PostCard />
+      <PostCard />
+      <PostCard />
+      <PostCard />
+      <PostCard />
+
+      {/* <PostCard />
+      <PostCard />
+      <PostCard /> */}
+
     </Container>
   )
 }

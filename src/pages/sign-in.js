@@ -19,6 +19,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { checkUser, signIn } from '@/utils/commonUtils'
 import Loading from '@/components/Loading'
 import useLoading from '@/utils/customHook/useLoading'
+import SocialAuth from '@/components/SocialAuth'
 
 const signin = ({ user }) => {
   const theme = useTheme()
@@ -37,7 +38,6 @@ const signin = ({ user }) => {
   })
 
   const onSignIn = async (data) => {
-    console.log(data)
     await signIn({
       emailId: data.email,
       password: data.password
@@ -46,7 +46,6 @@ const signin = ({ user }) => {
 
   const onSignUpClick = (event) => {
     event.preventDefault()
-    console.log(event)
     router.push('/sign-up')
   }
 
@@ -61,13 +60,11 @@ const signin = ({ user }) => {
   return (
     <>
       <Fade in={true}>
-
         <Paper elevation={4} sx={{
           width: '30%',
-          borderRadius: '20px',
+          borderRadius: '10px',
           // background: theme.palette.secondary.light
         }}
-          className={maconda.className}
         >
           <AuthBox
             component="form"
@@ -95,16 +92,15 @@ const signin = ({ user }) => {
               }}
             />
             <div className={styles.authButtons}>
-              <SecondaryButton variant='outlined'
+              {/* <SecondaryButton variant='outlined'
                 className={maconda.className}
                 onClick={onSignUpClick}
               >
                 Sign up
-              </SecondaryButton>
-              <PrimaryButton variant='contained' type="submit">Sign in</PrimaryButton>
-
+              </SecondaryButton> */}
+              <PrimaryButton variant='contained' type="submit" sx={{ paddingLeft: '5rem', paddingRight: '5rem' }}>Sign in</PrimaryButton>
             </div>
-
+            <SocialAuth signIn/>
           </AuthBox>
         </Paper>
       </Fade>
