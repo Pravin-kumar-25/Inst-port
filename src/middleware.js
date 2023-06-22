@@ -1,10 +1,7 @@
-import { NextResponse } from "next/server"
+export { default } from 'next-auth/middleware'
 
-export default function middleware(req) {
+console.log("inside middleware");
 
-    // console.log(req)
-    // const url = req.nextUrl.clone()
-    // url.pathname = '/sign-in'
-    // NextResponse.redirect(url)
-
+export const config = {
+    matcher: ["/profile" ,"/", "/posts"]
 }

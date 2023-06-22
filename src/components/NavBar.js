@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import ButtonLoader from './ButtonLoader';
+import LogoutButton from './LogoutButton';
 
 const NavBar = () => {
     const router = useRouter()
@@ -12,11 +13,15 @@ const NavBar = () => {
 
     const logout = async () => {
         setLogOutLoading(true)
+        console.log('after true loading');
         await logOut()
         router.push('sign-in')
     }
 
+    console.log("before rendering component");
+
     useEffect(() => {
+        console.log("After rendering the component");
         return () => {
             setLogOutLoading(false)
         }
@@ -59,10 +64,7 @@ const NavBar = () => {
                     </Box>
                     <Box sx={{ flexGrow: 0, display: 'flex', gap: '10px' }}>
                         <Button variant='' onClick={() => router.push('/profile')}>Profile</Button>
-                        <Button sx={{ width: '100px', height: '35px' }} variant='outlined' onClick={logout}>
-                            {logOutLoading ? <ButtonLoader /> : 'Logout'}
-
-                        </Button>
+                        <LogoutButton />
                     </Box>
                 </Toolbar>
 

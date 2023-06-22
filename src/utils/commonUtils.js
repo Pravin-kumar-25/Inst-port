@@ -3,12 +3,15 @@ import nookies from 'nookies'
 
 export const signUp = async (data) => {
     try {
-        const response = await instance.post('/public/signup', data)
+        const response = await instance.post('/api/user/signup', data)
+        console.log(response);
         if(response.data.result) {
             
         }
-        const token = response.data.data.token
-        const userData = response.data.data
+        const token = "response.data.data.token"
+        const userData = {
+            "name":"pravin"
+        }
         nookies.set(null,'token', token, {})
         nookies.set(null,'user',JSON.stringify(userData))
         return userData;

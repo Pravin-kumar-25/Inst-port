@@ -1,17 +1,19 @@
 import React, {useEffect} from 'react'
 import { Button, Container } from '@mui/material'
 import { useRouter } from 'next/router'
-import signin from './sign-in'
 import PostCard from '@/components/PostCard'
-
+import { useSession } from 'next-auth/react'
+import Loading from '@/components/Loading'
 
 const Home = () => {
-  const router = useRouter()
+  // const router = useRouter()
 
-  // useEffect(() => {
-  //   // Always do navigations after the first render
-  //   router.push('/sign-in', undefined, { shallow: true })
-  // }, [])
+  // const {data: session} = useSession()
+  // console.log(session);
+
+  // if(!session) {
+  //   return <Loading />
+  // }
 
   return (
     <Container maxWidth='xl' sx={{

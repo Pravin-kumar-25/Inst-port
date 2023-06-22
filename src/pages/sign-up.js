@@ -1,6 +1,5 @@
 import AuthBox from '@/components/AuthBox'
 import StandardInput from '@/components/StandardInput'
-import { maconda } from '@/utils/fonts'
 import { Fade, Paper, Typography } from '@mui/material'
 import React from 'react'
 import styles from '@/styles/Signin.module.css'
@@ -98,7 +97,7 @@ const signup = ({ user }) => {
                     >
                         Login
                     </SecondaryButton> */}
-                        <PrimaryButton variant='contained' className={maconda.className} type='submit' onClick={handleSubmit(onSignUp)}
+                        <PrimaryButton variant='contained'  type='submit' onClick={handleSubmit(onSignUp)}
                             sx={{ paddingLeft: '5rem', paddingRight: '5rem' }}
                         >
                             Sign up

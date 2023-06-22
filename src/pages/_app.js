@@ -1,14 +1,13 @@
 import '@/styles/globals.css'
 import theme from '@/styles/theme';
 import { ThemeProvider } from '@mui/material/styles';
-import { maconda, montserrat } from '@/utils/fonts';
-import HomeBackground from '@/components/HomeBackground';
+// import { maconda, montserrat } from '@/utils/fonts';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import EmptyLayout from '@/layout/EmptyLayout';
 import NavBar from '@/components/NavBar';
+import { SessionProvider } from 'next-auth/react';
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps: { session, ...pageProps } }) {
   const router = useRouter()
   const Layout = Component.Layout || EmptyLayout
 
@@ -32,23 +31,24 @@ export default function App({ Component, pageProps }) {
   // }, [router.events])
 
   return (
-    <ThemeProvider theme={theme}>
-      <NavBar />
+    <SessionProvider session={session}>
+      <ThemeProvider theme={theme}>
+        <NavBar />
 
-      {/* <HomeBackground > */}
-      <div id='main-container'
-      className={montserrat.className}
-      >
+        {/* <HomeBackground > */}
+        <div id='main-container'
+        // className={montserrat.className}
+        >
 
-        <Layout {...pageProps}>
-          <Component {...pageProps} />
+          <Layout {...pageProps}>
+            <Component {...pageProps} />
 
-        </Layout>
+          </Layout>
 
-      </div>
-      {/* </HomeBackground> */}
-    </ThemeProvider>
-
+        </div>
+        {/* </HomeBackground> */}
+      </ThemeProvider>
+    </SessionProvider>
   )
 }
 

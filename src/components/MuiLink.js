@@ -1,10 +1,12 @@
 import { Link } from '@mui/material'
 import React from 'react'
 
-const MuiLink = ({ children, ...restProps }) => {
+const MuiLink = ({ children, ...restProps }, ref) => {
     return (
-        <Link {...restProps} >{children}</Link>
+        <>
+        <Link ref={ref} {...restProps} >{children}</Link>
+        </>
     )
 }
 
-export default MuiLink
+export default React.forwardRef(MuiLink)

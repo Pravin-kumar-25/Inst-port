@@ -9,17 +9,18 @@ import useFormControl from '@mui/material'
 import LockPersonRoundedIcon from '@mui/icons-material/LockPersonRounded';
 import { useTheme } from '@mui/styles'
 import PrimaryButton from '@/components/PrimaryButton'
-import { maconda } from '@/utils/fonts'
+// import { maconda } from '@/utils/fonts'
 import SecondaryButton from '@/components/SecondaryButton'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { emailRules, signInPasswordRules } from '@/utils/inputRules'
 import { useState } from 'react'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
-import { checkUser, signIn } from '@/utils/commonUtils'
+import { checkUser } from '@/utils/commonUtils'
 import Loading from '@/components/Loading'
 import useLoading from '@/utils/customHook/useLoading'
 import SocialAuth from '@/components/SocialAuth'
+import { signIn } from 'next-auth/react'
 
 const signin = ({ user }) => {
   const theme = useTheme()
@@ -38,10 +39,15 @@ const signin = ({ user }) => {
   })
 
   const onSignIn = async (data) => {
-    await signIn({
-      emailId: data.email,
+    const result = await signIn('credentials', {
+      redirect: false,
+      email: data.email,
       password: data.password
     })
+    if(result.ok) {
+      router.push("/")
+    }
+    console.log(result);
   }
 
   const onSignUpClick = (event) => {
@@ -50,10 +56,6 @@ const signin = ({ user }) => {
   }
 
   if (loading) {
-    return <Loading />
-  }
-  if (user) {
-    router.push('/profile')
     return <Loading />
   }
 
@@ -74,7 +76,9 @@ const signin = ({ user }) => {
           >
             <div className='titleWithIcon'>
               <LockPersonRoundedIcon color='primary' />
-              <Typography variant='h5' component='h5' className={maconda.className}>SIGN IN</Typography>
+              <Typography variant='h5' component='h5'
+              //  className={maconda.className}
+              >SIGN IN</Typography>
             </div>
             <StandardInput control={control} name='email' label="Email" helperText={errors.email?.message} rules={emailRules} />
             <StandardInput control={control} name='password' label="Password" helperText={errors.password?.message} rules={signInPasswordRules}
@@ -100,7 +104,7 @@ const signin = ({ user }) => {
               </SecondaryButton> */}
               <PrimaryButton variant='contained' type="submit" sx={{ paddingLeft: '5rem', paddingRight: '5rem' }}>Sign in</PrimaryButton>
             </div>
-            <SocialAuth signIn/>
+            <SocialAuth signIn />
           </AuthBox>
         </Paper>
       </Fade>
