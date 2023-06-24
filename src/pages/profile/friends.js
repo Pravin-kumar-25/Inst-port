@@ -14,9 +14,6 @@ const Friends = () => {
     <div>Friends</div>
   )
 }
-export async function getServerSideProps(context) {
-  return await checkUser(context)
-}
 
 Friends.Layout = ProfileLayout
 

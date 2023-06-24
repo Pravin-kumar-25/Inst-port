@@ -16,10 +16,6 @@ const settings = () => {
   )
 }
 
-export async function getServerSideProps(context) {
-    return await checkUser(context)
-}
-
 settings.Layout = ProfileLayout
 
 settings.getLayout = function getLayout(page) {

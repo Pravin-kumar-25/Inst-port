@@ -121,8 +121,4 @@ const signin = ({ user }) => {
   )
 }
 
-export async function getServerSideProps(context) {
-  return await checkUser(context)
-}
-
 export default signin

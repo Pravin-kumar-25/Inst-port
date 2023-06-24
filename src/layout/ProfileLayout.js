@@ -62,10 +62,6 @@ const ProfileLayout = ({ user, children }) => {
     if (isLoading) {
         return <Loading />
     }
-    if (!user) {
-        router.push('/sign-in')
-        return <Loading />
-    }
 
     return (
         <Box sx={{
@@ -85,7 +81,7 @@ const ProfileLayout = ({ user, children }) => {
                 // paddingTop: '30px'
             }}>
                 <Avatar alt='user profile' src='' sx={{ width: '100px', height: '100px', margin: '30px' }} />
-                <h2>{user?.name}</h2>
+                <h2>Custom name</h2>
                 <nav aria-label='main mailbox folders' style={{ width: '100%' }}>
                     <List>
                         {renderMenu()}

@@ -4,7 +4,6 @@ import Loading from '@/components/Loading'
 import { useRouter } from 'next/router'
 import useLoading from '@/utils/customHook/useLoading'
 import { useState } from 'react'
-import { checkUser } from '@/utils/commonUtils'
 import { Grid } from '@mui/material'
 import GridItem from '@/components/GridItem'
 
@@ -23,13 +22,13 @@ export default function index() {
             <Grid item xs={6}>
                 <GridItem>
                     <h3>Name</h3>
-                    <p>{user?.name}</p>
+                    <p></p>
                 </GridItem>
             </Grid>
             <Grid item xs={6}>
                 <GridItem >
                     <h3>Email</h3>
-                    <p>{user?.email}</p>
+                    <p></p>
                 </GridItem>
             </Grid>
 
@@ -43,14 +42,14 @@ export default function index() {
             <Grid item xs={6}>
                 <GridItem>
                     <h3>Date of Birth</h3>
-                    <p>{user.name}</p>
+                    <p></p>
                 </GridItem>
             </Grid >
 
             <Grid item xs={6}>
                 <GridItem>
                     <h3>Gender</h3>
-                    <p>{user.name}</p>
+                    <p></p>
                 </GridItem>
             </Grid >
         </Grid >
