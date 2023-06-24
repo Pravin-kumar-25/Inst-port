@@ -27,21 +27,38 @@ export const authOption = {
                         email: credentials.email
                     }
                 })
-                
+
                 console.log("user in authorize ", user)
-                return user;
+                return {
+                    id: user.user_id,
+                    name: user.name,
+                    email: user.email,
+                    image: user.profile_pic_url
+                }
             }
         })
     ],
     callbacks: {
-        session: ({session,token}) => {
-            console.log('session callback', session);
+        async session({ session, token }) {
+            console.log('session callback', session, token);
             return {
-                ...session
+                ...session,
+                user: {
+                    ...session.user,
+                    id: token.id
+                }
             }
+            return session
         },
-        jwt: ({ token, user}) => {
-            console.log('jwt callback ', {token , user});
+        async jwt({ token, user }) {
+            console.log('jwt callback ', { token, user });
+            if (user) {
+                return {
+                    ...token,
+                    id: user.id
+                }
+            }
+            return token;
         }
     },
     pages: {

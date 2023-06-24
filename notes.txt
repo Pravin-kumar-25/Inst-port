@@ -1,0 +1,4 @@
+To update schema with database
+    - Delete 0_init folder
+    - run `npx prisma generate`
+    - run `npx prisma migrate dev --name init`

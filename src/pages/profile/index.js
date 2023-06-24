@@ -8,7 +8,7 @@ import { checkUser } from '@/utils/commonUtils'
 import { Grid } from '@mui/material'
 import GridItem from '@/components/GridItem'
 
-export default function index({ user }) {
+export default function index() {
     const [isLoading, setIsLoading] = useLoading()
     const [listSelected, setIsListSelected] = useState(0)
     const router = useRouter()
@@ -17,10 +17,7 @@ export default function index({ user }) {
     if (isLoading) {
         return <Loading />
     }
-    if (!user) {
-        router.push('/sign-in')
-        return <Loading />
-    }
+
     return (
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             <Grid item xs={6}>
@@ -60,9 +57,6 @@ export default function index({ user }) {
     )
 }
 
-export async function getServerSideProps(context) {
-    return await checkUser(context)
-}
 
 index.Layout = ProfileLayout
 

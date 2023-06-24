@@ -20,14 +20,14 @@ import { checkUser } from '@/utils/commonUtils'
 import Loading from '@/components/Loading'
 import useLoading from '@/utils/customHook/useLoading'
 import SocialAuth from '@/components/SocialAuth'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 
 const signin = ({ user }) => {
+  const session = useSession()
+  console.log(session);
   const theme = useTheme()
   const router = useRouter()
-
   const [loading, setLoading] = useLoading()
-
 
   const [showPassword, setShowPassword] = useState(false)
 
@@ -37,6 +37,14 @@ const signin = ({ user }) => {
       password: ''
     }
   })
+
+  if(session.status === 'loading') {
+    return <Loading />
+  }
+
+  if(session.status === "authenticated") {
+    router.push('/')
+  }
 
   const onSignIn = async (data) => {
     const result = await signIn('credentials', {

@@ -1,7 +1,7 @@
 import AuthBox from '@/components/AuthBox'
 import StandardInput from '@/components/StandardInput'
 import { Fade, Paper, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '@/styles/Signin.module.css'
 import PrimaryButton from '@/components/PrimaryButton'
 import SecondaryButton from '@/components/SecondaryButton'
@@ -13,11 +13,14 @@ import { checkUser, signUp } from '@/utils/commonUtils'
 import useLoading from '@/utils/customHook/useLoading'
 import Loading from '@/components/Loading'
 import SocialAuth from '@/components/SocialAuth'
-
+import { instance } from '@/utils/axios'
+import { signIn } from 'next-auth/react'
 
 const signup = ({ user }) => {
     const router = useRouter()
     const [loading, setLoading] = useLoading()
+    const [emailError, setEmailError] = useState(null)
+    const [emailValue, setEmailValue] = useState("")
 
     const onSignInClick = () => {
         router.push('/sign-in')
@@ -36,15 +39,56 @@ const signup = ({ user }) => {
 
     const onSignUp = async (data) => {
         // event.preventDefault();
-        const responseData = await signUp({
-            name: data.name,
-            email: data.email,
-            password: data.password
-        })
-        // nookies.set(null,'userData',responseData, {})
-        // localStorage.setItem("token",responseData.token);
-        router.push('/profile')
+        const { name, email, password } = data;
+        try {
+
+            //check email present
+            const response = await instance.get('/user', {
+                params: {
+                    email: email
+                }
+            })
+            console.log("response ", response);
+            if (response && response.data?.user) {
+                setEmailError("User already exist")
+                return;
+            }
+            setEmailError(null)
+
+            setLoading(true)
+            const createAccountResponse = await instance.post('/user/signup', {
+                data: {
+                    name: name,
+                    email: email,
+                    password: password
+                }
+            })
+            console.log(createAccountResponse);
+
+            if(createAccountResponse.status !== 201) {
+                //Add code for adding error message in page when acclunt creation is unsuccessful
+
+                setLoading(false)
+                return;
+            }
+
+            const result = await signIn('credentials', {
+                redirect: false,
+                email: email,
+                password: password
+            })
+            if (result.ok) {
+                router.push("/")
+            }
+            console.log(result);
+
+        } catch (error) {
+            console.log(error);
+            setLoading(false)
+        }
     }
+
+    //To check email present in DB and return error once the user stopes typing for 2 seconds...
 
     if (loading) {
         return <Loading />
@@ -73,8 +117,10 @@ const signup = ({ user }) => {
                         <LockPersonRoundedIcon color='primary' />
                         <Typography variant='h5' component='h5' >SIGN UP</Typography>
                     </div>
+
+                    {/* pass error property to change the color to red */}
                     <StandardInput control={control} name="name" label='Name' helperText={errors.name?.message} rules={nameRules} error={errors.name ? true : false} />
-                    <StandardInput control={control} name="email" label='Email' helperText={errors.email?.message} rules={emailRules} error={errors.email ? true : false} />
+                    <StandardInput control={control} name="email" label='Email' helperText={errors.email?.message || emailError} rules={emailRules} error={errors.email || emailError ? true : false} />
                     <StandardInput control={control} type='password' name="password" label='Password' helperText={errors.password?.message} rules={passwordRules} error={errors.password ? true : false} />
                     <StandardInput control={control} type='password' name="confirmPassword" label='Confirm Password' helperText={errors.confirmPassword?.message}
                         rules={{
@@ -97,12 +143,12 @@ const signup = ({ user }) => {
                     >
                         Login
                     </SecondaryButton> */}
-                        <PrimaryButton variant='contained'  type='submit' onClick={handleSubmit(onSignUp)}
+                        <PrimaryButton variant='contained' type='submit' onClick={handleSubmit(onSignUp)}
                             sx={{ paddingLeft: '5rem', paddingRight: '5rem' }}
                         >
                             Sign up
                         </PrimaryButton>
-                        
+
                     </div>
                     <SocialAuth signUp />
                 </AuthBox>
