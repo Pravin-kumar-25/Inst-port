@@ -38,11 +38,11 @@ const signin = ({ user }) => {
     }
   })
 
-  if(session.status === 'loading') {
+  if (session.status === 'loading') {
     return <Loading />
   }
 
-  if(session.status === "authenticated") {
+  if (session.status === "authenticated") {
     router.push('/')
   }
 
@@ -52,7 +52,7 @@ const signin = ({ user }) => {
       email: data.email,
       password: data.password
     })
-    if(result.ok) {
+    if (result.ok) {
       router.push("/")
     }
     console.log(result);
